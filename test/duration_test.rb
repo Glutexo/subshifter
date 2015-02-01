@@ -34,4 +34,9 @@ class DurationTest < Test::Unit::TestCase
     assert_equal base, Duration.new(base)
   end
 
+  def test_can_be_compared_with_another_duration
+    base = 120.123
+    assert_equal Duration.new(base), Duration.new(base)
+  end
+
 end

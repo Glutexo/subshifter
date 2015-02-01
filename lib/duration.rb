@@ -17,7 +17,11 @@ class Duration
   end
 
   def == compare
-    if compare.is_a? Numeric then self.to_f == compare else super end
+    if compare.is_a?(Numeric) || compare.is_a?(Duration)
+      self.to_f == compare
+    else
+      super
+    end
   end
 
 end
