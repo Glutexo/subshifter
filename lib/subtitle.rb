@@ -1,4 +1,4 @@
-require 'pp'
+require 'duration'
 
 class Subtitle
   attr_reader :body, :begin, :end

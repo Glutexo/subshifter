@@ -39,4 +39,17 @@ class DurationTest < Test::Unit::TestCase
     assert_equal Duration.new(base), Duration.new(base)
   end
 
+  def test_cannot_be_initialized_as_negative
+    assert_raise NegativeTimeError do
+      Duration.new -1
+    end
+  end
+
+  def test_cannot_be_shifted_to_negative
+    duration = Duration.new 1
+    assert_raise NegativeTimeError do
+      duration -= 1.1
+    end
+  end
+
 end

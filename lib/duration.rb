@@ -1,7 +1,10 @@
+require 'error/negative_time_error'
+
 class Duration
 
   def initialize seconds
     @seconds = seconds.to_f
+    raise NegativeTimeError.new("Duration cannot be negative.") if @seconds < 0
   end
 
   def to_f
@@ -9,7 +12,8 @@ class Duration
   end
 
   def + add
-    Duration.new(@seconds + add)
+    shifted = @seconds + add
+    Duration.new(shifted)
   end
 
   def - subtract

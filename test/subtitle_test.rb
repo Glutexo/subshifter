@@ -1,6 +1,5 @@
 require 'test/unit'
 require 'subtitle'
-require 'duration'
 
 class SubtitleTest < Test::Unit::TestCase
   FIXTURE = <<-EOS
