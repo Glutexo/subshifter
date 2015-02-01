@@ -12,4 +12,8 @@ class Duration
     Duration.new(@seconds + add)
   end
 
+  def - subtract
+    Duration.new(@seconds - subtract)
+  end
+
 end

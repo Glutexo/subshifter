@@ -19,4 +19,14 @@ class DurationTest < Test::Unit::TestCase
     assert_equal base + addition, duration.to_f
   end
 
+  def test_can_subtract_by_minus
+    base = 120.123
+    duration = Duration.new base
+    subtraction = 12.345
+    duration -= subtraction
+
+    assert duration.is_a? Duration
+    assert_equal base - subtraction, duration.to_f
+  end
+
 end
