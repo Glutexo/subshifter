@@ -64,6 +64,14 @@ Subtitle Fixture.
     assert_equal @end + shift, @subtitle.end.to_f
   end
 
+  def test_can_be_shifted
+    shift = 12.345
+    subtitle = @subtitle.shift shift
+
+    assert_equal @begin + shift, subtitle.begin.to_f
+    assert_equal @end + shift, subtitle.end.to_f
+  end
+
   def test_can_be_shifted_by_plus
     shift = 12.345
 
