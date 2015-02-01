@@ -12,8 +12,8 @@ class Subtitle
   end
 
   def shift seconds
-     @begin = Duration.new(@begin.to_f + seconds)
-     @end = Duration.new(@end.to_f + seconds)
+     @begin += seconds
+     @end += seconds
   end
 
   protected

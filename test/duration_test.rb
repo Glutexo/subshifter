@@ -9,4 +9,14 @@ class DurationTest < Test::Unit::TestCase
     assert_equal seconds, duration.to_f
   end
 
+  def test_can_add_by_plus
+    base = 120.123
+    duration = Duration.new base
+    addition = 12.345
+    duration += addition
+
+    assert duration.is_a? Duration
+    assert_equal base + addition, duration.to_f
+  end
+
 end

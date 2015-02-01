@@ -8,4 +8,8 @@ class Duration
     @seconds
   end
 
+  def + add
+    Duration.new(@seconds + add)
+  end
+
 end
