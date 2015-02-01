@@ -1,10 +1,17 @@
+=begin
+Single subtitle chunk. Dialog part with a begin and end timestamp.
+Both timestamps can be manipulated at the same time using the
+shift method or the +/- operators.
+=end
+
 require 'duration'
 require 'error/empty_body_error'
 require 'error/parse_error'
-require 'pp'
 class SubtitleChunk
   attr_reader :body, :begin, :end
 
+  # Can be initialized either from a string in the SRT format,
+  # or from a hash of the begin and end timestamps and the body.
   def initialize chunk
     if chunk.is_a? Hash
       @body = chunk[:body]
@@ -31,17 +38,18 @@ class SubtitleChunk
     self + seconds
   end
 
-  def + add
+  def + seconds
     SubtitleChunk.new body: @body,
-                 begin: @begin + add,
-                 end: @end + add
+                 begin: @begin + seconds,
+                 end: @end + seconds
   end
 
-  def - subtract
-    self + (-subtract)
+  def - seconds
+    self + (-seconds)
   end
 
   protected
+  # Parse the SRT timestamp format HH:MM:SS,SSS into Duration.
   def duration stamp
     stamp.match /(?<HOURS>\d{2}):(?<MINUTES>\d{2}):(?<SECONDS>\d{2}),(?<MILLISECONDS>\d{3})/ do |match|
       hours = match['HOURS'].to_f

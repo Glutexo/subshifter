@@ -1,4 +1,10 @@
-class Subtitle < File
+=begin
+A whole subtitle stream consisting of chunks representing the
+single dialogs. Accepts an IO object (e.g. a File) or a string
+itself in the SRT format.
+=end
+
+class Subtitle
   attr_reader :chunks
 
   def initialize input
