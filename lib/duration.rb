@@ -1,10 +1,13 @@
 require 'error/negative_time_error'
+require 'error/no_time_error'
 
 class Duration
 
   def initialize seconds
+    raise NoTimeError.new "Time must be set." if seconds.nil?
+
     @seconds = seconds.to_f
-    raise NegativeTimeError.new("Duration cannot be negative.") if @seconds < 0
+    raise NegativeTimeError.new "Duration cannot be negative." if @seconds < 0
   end
 
   def to_f

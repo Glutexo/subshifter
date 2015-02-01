@@ -1,0 +1,2 @@
+class OverlapError < ArgumentError
+end

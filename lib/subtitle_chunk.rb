@@ -7,6 +7,8 @@ shift method or the +/- operators.
 require 'duration'
 require 'error/empty_body_error'
 require 'error/parse_error'
+require 'error/no_time_error'
+require 'error/overlap_error'
 class SubtitleChunk
   attr_reader :body, :begin, :end
 
@@ -27,6 +29,7 @@ class SubtitleChunk
 
     @body.strip!
     raise EmptyBodyError.new "Body cannot be empty." if @body.empty?
+    raise OverlapError.new "Duration cannot be negative." if @begin.to_f > @end.to_f
   end
 
   def shift! seconds

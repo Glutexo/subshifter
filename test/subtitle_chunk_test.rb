@@ -129,4 +129,19 @@ SubtitleChunk Fixture.
     end
   end
 
+  def test_chunk_must_have_begin_time
+    assert_raise NoTimeError do
+      SubtitleChunk.new body: 'TEST',
+                        begin: nil,
+                        end: 1
+    end
+  end
+
+  def test_end_time_must_be_greater_than_begin_time
+    assert_raise OverlapError do
+      SubtitleChunk.new body: 'TEST',
+                            begin: 3,
+                            end: 2
+    end
+  end
 end

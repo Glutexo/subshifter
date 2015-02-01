@@ -1,0 +1,2 @@
+class NoTimeError < ArgumentError
+end
