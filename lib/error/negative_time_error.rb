@@ -1,0 +1,3 @@
+class NegativeTimeError < ArgumentError
+
+end

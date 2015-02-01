@@ -1,0 +1,2 @@
+class ParseError < ArgumentError
+end

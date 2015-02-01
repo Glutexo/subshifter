@@ -1,0 +1,2 @@
+class EmptyBodyError < ArgumentError
+end
