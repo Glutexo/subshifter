@@ -62,4 +62,8 @@ class DurationTest < Test::Unit::TestCase
     assert !(Duration.new(4) < Duration.new(3))
   end
 
+  def test_can_be_written
+    assert_equal "03:25:45,678", Duration.new(12345.678).to_s
+  end
+
 end

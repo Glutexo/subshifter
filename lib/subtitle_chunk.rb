@@ -51,6 +51,15 @@ class SubtitleChunk
     self + (-seconds)
   end
 
+  def to_s order = nil
+    output = ""
+    output << "#{order}\n" unless order.nil?
+    output << <<-EOS
+#{@begin} --> #{@end}
+#{@body}
+    EOS
+  end
+
   protected
   # Parse the SRT timestamp format HH:MM:SS,SSS into Duration.
   def duration stamp

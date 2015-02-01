@@ -10,7 +10,7 @@ Subtitle Fixture.
   EOS
 
   def setup
-    @subtitle = SubtitleChunk.new FIXTURE
+    @chunk = SubtitleChunk.new FIXTURE
 
     hours = 2
     minutes = hours * 60 + 26
@@ -25,18 +25,18 @@ Subtitle Fixture.
 
 
   def test_body_is_extracted
-    assert_equal "\"Multiline\"\nSubtitle Fixture.", @subtitle.body
+    assert_equal "\"Multiline\"\nSubtitle Fixture.", @chunk.body
   end
 
   def test_begin_time_is_extracted
-    subtitle_begin = @subtitle.begin
+    subtitle_begin = @chunk.begin
     assert subtitle_begin.is_a? Duration
 
     assert_equal @begin, subtitle_begin
   end
 
   def test_end_time_is_extracted
-    subtitle_end = @subtitle.end
+    subtitle_end = @chunk.end
     assert subtitle_end.is_a? Duration
 
     assert_equal @end, subtitle_end
@@ -57,15 +57,15 @@ Subtitle Fixture.
 
   def test_can_be_shifted_in_place
     shift = 12.345
-    @subtitle.shift! shift
+    @chunk.shift! shift
 
-    assert_equal @begin + shift, @subtitle.begin
-    assert_equal @end + shift, @subtitle.end
+    assert_equal @begin + shift, @chunk.begin
+    assert_equal @end + shift, @chunk.end
   end
 
   def test_can_be_shifted
     shift = 12.345
-    subtitle = @subtitle.shift shift
+    subtitle = @chunk.shift shift
 
     assert_equal @begin + shift, subtitle.begin
     assert_equal @end + shift, subtitle.end
@@ -74,19 +74,19 @@ Subtitle Fixture.
   def test_can_be_shifted_by_plus
     shift = 12.345
 
-    @subtitle += shift
+    @chunk += shift
 
-    assert_equal @begin + shift, @subtitle.begin
-    assert_equal @end + shift, @subtitle.end
+    assert_equal @begin + shift, @chunk.begin
+    assert_equal @end + shift, @chunk.end
   end
 
   def test_can_be_shifted_by_minus
     shift = 12.345
 
-    @subtitle -= shift
+    @chunk -= shift
 
-    assert_equal @begin - shift, @subtitle.begin
-    assert_equal @end - shift, @subtitle.end
+    assert_equal @begin - shift, @chunk.begin
+    assert_equal @end - shift, @chunk.end
   end
 
   def test_body_cannot_be_empty
@@ -144,4 +144,14 @@ SubtitleChunk Fixture.
                             end: 2
     end
   end
+
+  def test_can_be_written_without_an_order
+    fixture_without_first_line = FIXTURE.lines.drop(1).join
+    assert_equal fixture_without_first_line, @chunk.to_s
+  end
+
+  def test_can_be_written_with_an_order
+    assert_equal FIXTURE, @chunk.to_s(1)
+  end
+
 end

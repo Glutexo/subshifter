@@ -28,4 +28,12 @@ class Duration
     to_f <=> compare.to_f
   end
 
+  def to_s
+    seconds = @seconds % 60
+    total_minutes = (@seconds / 60).floor
+    minutes = total_minutes % 60
+    hours = (total_minutes / 60).floor
+    "#{'%02d' % hours}:#{'%02d' % minutes}:#{('%0.3f' % seconds).tr '.', ','}"
+  end
+
 end
