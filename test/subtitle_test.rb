@@ -33,14 +33,14 @@ Subtitle Fixture.
     subtitle_begin = @subtitle.begin
     assert subtitle_begin.is_a? Duration
 
-    assert_equal @begin, subtitle_begin.to_f
+    assert_equal @begin, subtitle_begin
   end
 
   def test_end_time_is_extracted
     subtitle_end = @subtitle.end
     assert subtitle_end.is_a? Duration
 
-    assert_equal @end, subtitle_end.to_f
+    assert_equal @end, subtitle_end
   end
 
   def test_can_be_initialized_by_hash
@@ -52,24 +52,24 @@ Subtitle Fixture.
     subtitle = Subtitle.new hash
 
     assert_equal hash[:body], subtitle.body
-    assert_equal hash[:begin], subtitle.begin.to_f
-    assert_equal hash[:end], subtitle.end.to_f
+    assert_equal hash[:begin], subtitle.begin
+    assert_equal hash[:end], subtitle.end
   end
 
   def test_can_be_shifted_in_place
     shift = 12.345
     @subtitle.shift! shift
 
-    assert_equal @begin + shift, @subtitle.begin.to_f
-    assert_equal @end + shift, @subtitle.end.to_f
+    assert_equal @begin + shift, @subtitle.begin
+    assert_equal @end + shift, @subtitle.end
   end
 
   def test_can_be_shifted
     shift = 12.345
     subtitle = @subtitle.shift shift
 
-    assert_equal @begin + shift, subtitle.begin.to_f
-    assert_equal @end + shift, subtitle.end.to_f
+    assert_equal @begin + shift, subtitle.begin
+    assert_equal @end + shift, subtitle.end
   end
 
   def test_can_be_shifted_by_plus
@@ -77,8 +77,8 @@ Subtitle Fixture.
 
     @subtitle += shift
 
-    assert_equal @begin + shift, @subtitle.begin.to_f
-    assert_equal @end + shift, @subtitle.end.to_f
+    assert_equal @begin + shift, @subtitle.begin
+    assert_equal @end + shift, @subtitle.end
   end
 
   def test_can_be_shifted_by_minus
@@ -86,8 +86,8 @@ Subtitle Fixture.
 
     @subtitle -= shift
 
-    assert_equal @begin - shift, @subtitle.begin.to_f
-    assert_equal @end - shift, @subtitle.end.to_f
+    assert_equal @begin - shift, @subtitle.begin
+    assert_equal @end - shift, @subtitle.end
   end
 
 end
