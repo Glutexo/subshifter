@@ -19,4 +19,8 @@ class Subtitle
     end
   end
 
+  def to_s
+    @chunks.map.with_index { |chunk, order| chunk.to_s(order + 1) }.join "\n"
+  end
+
 end
