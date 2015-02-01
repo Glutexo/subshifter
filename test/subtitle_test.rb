@@ -24,8 +24,9 @@ Subtitle Fixture.
     @end = seconds
   end
 
+
   def test_body_is_extracted
-    assert_equal "\"Multiline\"\nSubtitle Fixture.\n", @subtitle.body
+    assert_equal "\"Multiline\"\nSubtitle Fixture.", @subtitle.body
   end
 
   def test_begin_time_is_extracted
@@ -42,9 +43,22 @@ Subtitle Fixture.
     assert_equal @end, subtitle_end.to_f
   end
 
-  def test_can_be_shifted
+  def test_can_be_initialized_by_hash
+    hash = {
+        body: "TEST BODY",
+        begin: 123,
+        end: 456
+    }
+    subtitle = Subtitle.new hash
+
+    assert_equal hash[:body], subtitle.body
+    assert_equal hash[:begin], subtitle.begin.to_f
+    assert_equal hash[:end], subtitle.end.to_f
+  end
+
+  def test_can_be_shifted_in_place
     shift = 12.345
-    @subtitle.shift shift
+    @subtitle.shift! shift
 
     assert_equal @begin + shift, @subtitle.begin.to_f
     assert_equal @end + shift, @subtitle.end.to_f

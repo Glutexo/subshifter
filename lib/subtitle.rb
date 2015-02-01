@@ -4,16 +4,34 @@ class Subtitle
   attr_reader :body, :begin, :end
 
   def initialize chunk
-    chunk.match /^\d+(?<NEWLINE>\r?\n)(?<BEGIN>(?<TIME>\d{2}:\d{2}:\d{2},\d{3})) --> (?<END>\g<TIME>)\k<NEWLINE>(?<BODY>.+)$/m do |match|
-      @body = match['BODY']
-      @begin = duration match['BEGIN']
-      @end = duration match['END']
-    end or raise ArgumentError.new "Invalid subtitle chunk: #{chunk}"
+    if chunk.is_a? Hash
+      @body = chunk[:body]
+      @begin = Duration.new chunk[:begin]
+      @end = Duration.new chunk[:end]
+    else
+      chunk.match /^\d+(?<NEWLINE>\r?\n)(?<BEGIN>(?<TIME>\d{2}:\d{2}:\d{2},\d{3})) --> (?<END>\g<TIME>)\k<NEWLINE>(?<BODY>.+)$/m do |match|
+        @body = match['BODY'].chomp
+        @begin = duration match['BEGIN']
+        @end = duration match['END']
+      end or raise ArgumentError.new "Invalid subtitle chunk: #{chunk}"
+    end
+
+    raise ArgumentError.new "Body cannot be empty." if @body.empty?
+  end
+
+  def shift! seconds
+     @begin += seconds
+     @end += seconds
   end
 
   def shift seconds
-     @begin += seconds
-     @end += seconds
+    self + seconds
+  end
+
+  def + add
+    Subtitle.new body: @body,
+                 begin: @begin + add,
+                 end: @end + add
   end
 
   protected
