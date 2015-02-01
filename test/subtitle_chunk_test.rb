@@ -154,4 +154,17 @@ SubtitleChunk Fixture.
     assert_equal FIXTURE, @chunk.to_s(1)
   end
 
+  def test_can_be_duplicated
+    chunk = @chunk.dup
+
+    assert_equal chunk.to_s, @chunk.to_s
+    assert_not_same chunk, @chunk
+
+    assert_equal chunk.begin.to_s, @chunk.begin.to_s
+    assert_not_same chunk.begin, @chunk.begin
+
+    assert_equal chunk.end.to_s, @chunk.end.to_s
+    assert_not_same chunk.end, @chunk.end
+  end
+
 end

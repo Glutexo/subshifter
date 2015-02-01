@@ -20,4 +20,41 @@ class SubtitleTest < Test::Unit::TestCase
     assert_equal @raw, @subtitle.to_s
   end
 
+  def test_can_be_shifted
+    shift = 12.34
+
+    chunks = @subtitle.chunks.map { |chunk| chunk.shift shift }
+    shifted = Subtitle.new chunks
+
+    assert_equal shifted.to_s, @subtitle.shift(shift).to_s
+    assert_equal @raw, @subtitle.to_s
+  end
+
+  def test_can_be_duplicated
+    subtitle = @subtitle.dup
+
+    assert_equal subtitle.to_s, @subtitle.to_s
+    assert_not_same subtitle, @subtitle
+
+    first_chunk = @subtitle.chunks.first
+    dup_first_chunk = subtitle.chunks.first
+    assert_equal dup_first_chunk.to_s, first_chunk.to_s
+    assert_not_same dup_first_chunk, first_chunk
+  end
+
+  def test_can_be_shifted_in_place
+    shift = 12.34
+
+    chunks = @subtitle.chunks.map { |chunk| chunk.shift shift }
+    shifted = Subtitle.new chunks
+
+    subtitle = @subtitle.dup
+    subtitle.shift! shift
+
+    assert_equal shifted.to_s, subtitle.to_s
+    assert_not_same shifted, subtitle
+    assert_equal @raw, @subtitle.to_s
+    assert_not_same subtitle, @subtitle
+  end
+
 end

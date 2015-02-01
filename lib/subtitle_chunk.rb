@@ -32,9 +32,15 @@ class SubtitleChunk
     raise OverlapError.new "Duration cannot be negative." if @begin.to_f > @end.to_f
   end
 
+  def initialize_copy source
+    super
+    @begin, @end = @begin.dup, @end.dup
+  end
+
   def shift! seconds
     shifted = self + seconds
     @begin, @end = shifted.begin, shifted.end
+    self
   end
 
   def shift seconds
