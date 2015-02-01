@@ -81,4 +81,13 @@ Subtitle Fixture.
     assert_equal @end + shift, @subtitle.end.to_f
   end
 
+  def test_can_be_shifted_by_minus
+    shift = 12.345
+
+    @subtitle -= shift
+
+    assert_equal @begin - shift, @subtitle.begin.to_f
+    assert_equal @end - shift, @subtitle.end.to_f
+  end
+
 end

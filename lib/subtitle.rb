@@ -34,6 +34,10 @@ class Subtitle
                  end: @end + add
   end
 
+  def - subtract
+    self + (-subtract)
+  end
+
   protected
   def duration stamp
     stamp.match /(?<HOURS>\d{2}):(?<MINUTES>\d{2}):(?<SECONDS>\d{2}),(?<MILLISECONDS>\d{3})/ do |match|

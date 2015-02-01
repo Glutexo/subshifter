@@ -13,7 +13,7 @@ class Duration
   end
 
   def - subtract
-    Duration.new(@seconds - subtract)
+    self + (-subtract)
   end
 
 end
