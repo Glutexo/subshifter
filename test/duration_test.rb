@@ -34,7 +34,7 @@ class DurationTest < Test::Unit::TestCase
     assert_equal base, Duration.new(base)
   end
 
-  def test_can_be_compared_with_another_duration
+  def test_can_be_compared_equal_with_another_duration
     base = 120.123
     assert_equal Duration.new(base), Duration.new(base)
   end
@@ -50,6 +50,16 @@ class DurationTest < Test::Unit::TestCase
     assert_raise NegativeTimeError do
       duration -= 1.1
     end
+  end
+
+  def test_can_be_compared_greater_with_another_duration
+    assert Duration.new(3) > Duration.new(2)
+    assert !(Duration.new(3) > Duration.new(4))
+  end
+
+  def test_can_be_compared_lesser_with_another_duration
+    assert Duration.new(2) < Duration.new(3)
+    assert !(Duration.new(4) < Duration.new(3))
   end
 
 end

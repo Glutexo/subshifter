@@ -2,6 +2,7 @@ require 'error/negative_time_error'
 require 'error/no_time_error'
 
 class Duration
+  include Comparable
 
   def initialize seconds
     raise NoTimeError.new "Time must be set." if seconds.nil?
@@ -23,12 +24,8 @@ class Duration
     self + (-subtract)
   end
 
-  def == compare
-    if compare.is_a?(Numeric) || compare.is_a?(Duration)
-      self.to_f == compare
-    else
-      super
-    end
+  def <=> compare
+    to_f <=> compare.to_f
   end
 
 end
