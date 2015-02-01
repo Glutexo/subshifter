@@ -20,8 +20,8 @@ class Subtitle
   end
 
   def shift! seconds
-     @begin += seconds
-     @end += seconds
+    shifted = self + seconds
+    @begin, @end = shifted.begin, shifted.end
   end
 
   def shift seconds
