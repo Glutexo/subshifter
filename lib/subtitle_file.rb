@@ -1,7 +1,7 @@
 class SubtitleFile < File
   attr_reader :subtitles
 
-  def parse
+  def load
     @subtitles = []
 
     chunks = read.split /(\r?\n){2}/

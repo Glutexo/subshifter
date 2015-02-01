@@ -89,4 +89,44 @@ Subtitle Fixture.
     assert_equal @end - shift, @subtitle.end
   end
 
+  def test_body_cannot_be_empty
+    assert_raise EmptyBodyError do
+      Subtitle.new body: " \n",
+                   begin: 1,
+                   end: 2
+    end
+  end
+
+  def test_chunk_must_have_order_number
+    chunk = <<-EOS
+02:26:23,670 --> 02:26:26,138
+"Multiline"
+Subtitle Fixture.
+    EOS
+    assert_raise ParseError do
+      Subtitle.new chunk
+    end
+  end
+
+  def test_chunk_must_have_time
+    chunk = <<-EOS
+1
+"Multiline"
+Subtitle Fixture.
+    EOS
+    assert_raise ParseError do
+      Subtitle.new chunk
+    end
+  end
+
+  def test_chunk_must_have_body
+    chunk = <<-EOS
+1
+02:26:23,670 --> 02:26:26,138
+    EOS
+    assert_raise ParseError do
+      Subtitle.new chunk
+    end
+  end
+
 end

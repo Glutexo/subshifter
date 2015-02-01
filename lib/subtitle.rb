@@ -1,5 +1,6 @@
 require 'duration'
-
+require 'error/empty_body_error'
+require 'error/parse_error'
 class Subtitle
   attr_reader :body, :begin, :end
 
@@ -10,13 +11,14 @@ class Subtitle
       @end = Duration.new chunk[:end]
     else
       chunk.match /^\d+(?<NEWLINE>\r?\n)(?<BEGIN>(?<TIME>\d{2}:\d{2}:\d{2},\d{3})) --> (?<END>\g<TIME>)\k<NEWLINE>(?<BODY>.+)$/m do |match|
-        @body = match['BODY'].chomp
+        @body = match['BODY']
         @begin = duration match['BEGIN']
         @end = duration match['END']
-      end or raise ArgumentError.new "Invalid subtitle chunk: #{chunk}"
+      end or raise ParseError.new "Invalid subtitle chunk: #{chunk}"
     end
 
-    raise ArgumentError.new "Body cannot be empty." if @body.empty?
+    @body.strip!
+    raise EmptyBodyError.new "Body cannot be empty." if @body.empty?
   end
 
   def shift! seconds
