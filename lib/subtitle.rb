@@ -11,6 +11,11 @@ class Subtitle
     end or raise ArgumentError.new "Invalid subtitle chunk: #{chunk}"
   end
 
+  def shift seconds
+     @begin = Duration.new(@begin.to_f + seconds)
+     @end = Duration.new(@end.to_f + seconds)
+  end
+
   protected
   def duration stamp
     stamp.match /(?<HOURS>\d{2}):(?<MINUTES>\d{2}):(?<SECONDS>\d{2}),(?<MILLISECONDS>\d{3})/ do |match|
