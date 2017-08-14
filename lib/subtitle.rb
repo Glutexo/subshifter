@@ -4,6 +4,8 @@ single dialogs. Accepts an IO object (e.g. a File) or a string
 itself in the SRT format.
 =end
 
+require 'subtitle_chunk'
+
 class Subtitle
   attr_reader :chunks
 
