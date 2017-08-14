@@ -20,4 +20,4 @@ end
 subtitle = Subtitle.new $<.read
 subtitle.shift! shift
 
-File.write 'shifted.srt', subtitle
+print subtitle
