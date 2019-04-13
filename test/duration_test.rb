@@ -63,7 +63,11 @@ class DurationTest < Test::Unit::TestCase
   end
 
   def test_can_be_written
-    assert_equal "03:25:45,678", Duration.new(12345.678).to_s
+    assert_equal "12:34:56,789", Duration.new(45296.789).to_s
+  end
+
+  def test_can_be_written_with_zeroes
+    assert_equal "01:02:03,400", Duration.new(3723.4).to_s
   end
 
 end
