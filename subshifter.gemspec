@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name = 'subshifter'
-  spec.version = '0.0.3'
+  spec.version = '0.0.4'
   spec.date = '2019-04-13'
   spec.summary = 'Subtitle shifter'
   spec.description = 'A simple application to shift time in SRT subtitle files'

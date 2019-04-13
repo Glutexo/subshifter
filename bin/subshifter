@@ -7,12 +7,12 @@ begin
   shift = Float(ARGV.shift)
 rescue ArgumentError, TypeError
   puts <<-HELP
-Usage: subshift.rb <duration> [files]
+Usage: subshifter <duration> [files]
   <duration> is in seconds and can be decimal.
     Positive number – subtitles will appear later.
     Negative number – subtitles will appear sooner.
 
-Example: ruby subshift.rb -10.7 subtitle.srt
+Example: subshifter -10.7 subtitle.srt
   HELP
   exit
 end
